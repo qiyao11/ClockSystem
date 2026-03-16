@@ -1,0 +1,105 @@
+<Window x:Class="ClockSystem.TimeAdjustDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="调整母钟时间"
+        Width="400"
+        Height="200"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- 按钮样式 -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="#3498DB"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#2980B9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#1F618D"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- 标签样式 -->
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="#333333"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <!-- 文本框样式 -->
+            <Style TargetType="TextBox">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Width" Value="60"/>
+                <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="#3498DB"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 时间输入区域 -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 年-月-日 -->
+            <Label Grid.Row="0" Grid.Column="0" Content="年:"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Year}"/>
+            
+            <Label Grid.Row="0" Grid.Column="2" Content="月:"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Month}"/>
+            
+            <Label Grid.Row="0" Grid.Column="4" Content="日:"/>
+            <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Day}"/>
+
+            <!-- 时:分:秒 -->
+            <Label Grid.Row="1" Grid.Column="0" Content="时:"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Hour}"/>
+            
+            <Label Grid.Row="1" Grid.Column="2" Content="分:"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Minute}"/>
+            
+            <Label Grid.Row="1" Grid.Column="4" Content="秒:"/>
+            <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Second}"/>
+        </Grid>
+
+        <!-- 按钮区域 -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <Button Content="应用" Click="ApplyButton_Click"/>
+            <Button Content="取消" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,150 @@
+<Window x:Class="ClockSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClockSystem"
+        mc:Ignorable="d"
+        Title="子母钟管理系统"
+        Width="1000"
+        Height="800"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!-- 现代化颜色方案 -->
+            <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
+            <SolidColorBrush x:Key="SecondaryColor" Color="#3498DB"/>
+            <SolidColorBrush x:Key="AccentColor" Color="#E74C3C"/>
+            <SolidColorBrush x:Key="LightColor" Color="#F8F9FA"/>
+            <SolidColorBrush x:Key="DarkColor" Color="#2C3E50"/>
+            <SolidColorBrush x:Key="TextColor" Color="#333333"/>
+            <SolidColorBrush x:Key="BorderColor" Color="#E0E0E0"/>
+
+            <!-- 按钮样式 -->
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontWeight" Value="Medium"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="3" Opacity="0.3" Direction="270"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#2980B9"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="#1F618D"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- 标签样式 -->
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+                <Setter Property="FontSize" Value="14"/>
+            </Style>
+
+            <!-- 文本框样式 -->
+            <Style TargetType="TextBox">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="Padding" Value="8"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Background" Value="White"/>
+                <Style.Triggers>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="{StaticResource SecondaryColor}"/>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect BlurRadius="5" Opacity="0.2" Direction="0"/>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <!-- 面板样式 -->
+            <Style TargetType="Border">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect BlurRadius="10" Opacity="0.1" Direction="270"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid Background="#F5F5F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- 顶部控制区 -->
+        <Border Grid.Row="0" Margin="20,20,20,10" Padding="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Column="0" Content="母钟时间:" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+                <Label Grid.Column="1" Content="{Binding TimeDisplay}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0"/>
+                
+                <Button Grid.Column="3" Content="同步系统时间" Command="{Binding SyncSystemTimeCommand}"/>
+                <Button Grid.Column="4" Content="调整时间" Command="{Binding OpenTimeAdjustCommand}"/>
+                <Button Grid.Column="5" Content="系统设置" Command="{Binding OpenSettingsCommand}"/>
+            </Grid>
+        </Border>
+
+        <!-- 中间母钟显示区 -->
+        <Border Grid.Row="1" Margin="20,10,20,10" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <!-- 母钟画布 -->
+                <Canvas x:Name="ClockCanvas" Background="#F5F5F5" Margin="20" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <!-- 时钟将通过代码绘制 -->
+                </Canvas>
+            </Grid>
+        </Border>
+
+        <!-- 底部日志显示区 -->
+        <Border Grid.Row="2" Margin="20,10,20,20" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Content="报时系统反馈" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
+                
+                <DockPanel Grid.Row="1">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <TextBlock x:Name="LogTextBlock" Text="{Binding LogText}" FontSize="12" FontFamily="Consolas" TextWrapping="Wrap"/>
+                    </ScrollViewer>
+                </DockPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
