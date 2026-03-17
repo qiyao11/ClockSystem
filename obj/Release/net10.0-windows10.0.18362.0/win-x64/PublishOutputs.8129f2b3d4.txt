@@ -1,2 +1,0 @@
-D:\Lenovo\Desktop\ClockSystem\bin\Release\net10.0-windows10.0.18362.0\win-x64\publish\ClockSystem.pdb
-D:\Lenovo\Desktop\ClockSystem\bin\Release\net10.0-windows10.0.18362.0\win-x64\publish\ClockSystem.exe
