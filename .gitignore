@@ -1,0 +1,50 @@
+# Build and output directories
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.sln.docstates
+*.sln.metaproj
+*.sln.metaproj.tmp
+
+# ReSharper
+_ReSharper*/
+*.ReSharper
+
+# NuGet packages
+packages/
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
+# Build artifacts
+*.exe
+*.dll
+*.pdb
+
+# Test results
+TestResults/
+
+# Environment variables
+.env
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Clock system specific files
+clock.json
