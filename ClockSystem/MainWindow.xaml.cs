@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using ClockSystem.ViewModels;
+﻿﻿using ClockSystem.ViewModels;
 using System;
 using System.ComponentModel;
 using System.Windows;
